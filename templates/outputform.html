@@ -1,0 +1,74 @@
+$def with (outputform, outputs, mode='view', itemid=None, message=None)
+	$if message!=None:
+		<div class="message">
+			<h3>$message
+			$if mode =='remove':
+				<div class="confirm">
+					$:outputform['output_confirm_action'].render()
+					$:outputform['output_confirm_itemid'].render()
+					$:outputform['output_confirm_yes'].render()
+					$:outputform['output_confirm_no'].render()
+				</div>
+			</h3>
+		</div>
+		
+	<table>
+	<tr>
+		<th></th>
+		<th>id</th>
+		<th>iodevice</th>
+		<th>pin</th>
+		<th>type</th>
+		<th>label</th>
+		<th>color</th>
+	</tr>
+	$for idx, d in enumerate(outputs):
+		<tr>
+		$if mode=='edit' and itemid==d['id']:
+			<th>
+				$:outputform['output_id_'+str(idx)].render()
+				$:outputform['output_save_'+str(idx)].render()
+				$:outputform['output_cancel_'+str(idx)].render()
+			</th>
+			<td>$d['id'] </td>
+			<td>$:outputform['output_iodevice_'+str(idx)].render()</td>
+			<td>$:outputform['output_pin_'+str(idx)].render()</td>
+			<td>$:outputform['output_type_'+str(idx)].render()</td>
+			<td>$:outputform['output_label_'+str(idx)].render()</td>
+			<td>$:outputform['output_color_'+str(idx)].render()</td>
+		$else:
+			<th>
+				$:outputform['output_id_'+str(idx)].render()
+				$:outputform['output_edit_'+str(idx)].render()
+				$:outputform['output_remove_'+str(idx)].render()
+			</th>
+			<td>$d['id']</td>
+			<td>$d['iodevice']</td>
+			<td>$d['pin']</td>
+			<td>$d['type']</td>
+			<td>$d['label']</td>
+			<td>$d['color']</td>
+		</tr>
+		
+	$if mode =='add':
+		$code:
+			idx += 1
+		<tr>
+			<th>
+				$:outputform['output_id_'+str(idx)].render()
+				$:outputform['output_save_'+str(idx)].render()
+				$:outputform['output_cancel_'+str(idx)].render()
+				
+			</th>
+			<td>*</td>
+			<td>$:outputform['output_iodevice_'+str(idx)].render()</td>
+			<td>$:outputform['output_pin_'+str(idx)].render()</td>
+			<td>$:outputform['output_type_'+str(idx)].render()</td>
+			<td>$:outputform['output_label_'+str(idx)].render()</td>
+			<td>$:outputform['output_color_'+str(idx)].render()</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	$:outputform['command'].render()
+	$:outputform['output_add'].render()

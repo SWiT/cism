@@ -1,0 +1,64 @@
+/* 
+    Document   : default
+    Created on : Feb 17, 2013, 5:25:38 PM
+    Author     : swit
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.logout {float:right;}
+
+table {border-spacing:0;border-collapse:collapse;}
+th {background-color:#A8A8A8;}
+th, td {padding:3px;}
+tr:nth-child(odd) {background-color:#D8D8D8;}
+tr:nth-child(even) {background-color:#E8E8E8;}
+tr.g0 {background-color:#D8D8D8;}
+tr.g1 {background-color:#E8E8E8;}
+.nocss tr, .nocss th {background-color:transparent;}
+
+.container {border:1px solid #000000;padding:5px;float:left;background-color:#F4F4F4;}
+
+h2.blocktoggle {margin:3px;}
+
+.calContainer {display:none;position:absolute;}
+
+#statuses td {text-align:center;min-width:60px;}
+#statuses th {text-align:left;}
+#statuses th.datetime {width:165px;}
+#statuses th.label  {text-align:right;}
+#statuses h3 {margin-bottom:0;}
+
+#graphs {max-width:800px;}
+
+input.color {width:65px;}
+input.text {width:110px;}
+input.number {width:50px;}
+
+div.arrow-down {
+    width: 0; 
+    height: 0; 
+    font-size:0px;
+    line-height:0px;
+    display:inline;
+    position:relative;
+    margin:5px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #000;
+    bottom:4px;
+}
+div.arrow-right {
+    width: 0; 
+    height: 0; 
+    font-size:0px;
+    line-height:0px;
+    display:inline;
+    position:relative;
+    margin:5px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #000;
+    bottom:8px;
+}
+
+

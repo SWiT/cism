@@ -1,0 +1,100 @@
+$def with (rulesform, rules, mode='view', itemid=None, message=None)
+	$if message!=None:
+		<div class="message">
+			<h3>$message
+			$if mode =='remove':
+				<div class="confirm">
+					$:rulesform['rule_confirm_action'].render()
+					$:rulesform['rule_confirm_itemid'].render()
+					$:rulesform['rule_confirm_yes'].render()
+					$:rulesform['rule_confirm_no'].render()
+				</div>
+			</h3>
+		</div>
+		
+	<table>
+	<tr>
+		<th></th>
+		<th>id</th>
+		<th>source<br/>type</th>
+		<th>source<br/>output</th>
+		<th>source<br/>input</th>
+		<th>operation</th>
+		<th>compare<br/>type</th>
+		<th>compare<br/>value</th>
+		<th>compare<br/>output</th>
+		<th>compare<br/>input</th>
+		<th>outcome</th>
+		<th>outcome<br/>value</th>
+		<th>priority</th>
+	</tr>
+	$code:
+		idx = -1
+	$for idx, d in enumerate(rules):
+		<tr>
+		$if mode=='edit' and itemid==d['id']:
+			<th>
+				$:rulesform['rule_id_'+str(idx)].render()
+				$:rulesform['rule_save_'+str(idx)].render()
+				$:rulesform['rule_cancel_'+str(idx)].render()
+			</th>
+			<td>$:d['id']</td>
+			<td>$:rulesform['rule_sourcetype_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_sourceoutputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_sourceinputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_operation_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_comparetype_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_comparevalue_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_compareoutputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_compareinputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_outcomeid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_outcomevalue_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_priority_'+str(idx)].render()</td>
+		$else:
+			<th>
+				$:rulesform['rule_id_'+str(idx)].render()
+				$:rulesform['rule_edit_'+str(idx)].render()
+				$:rulesform['rule_remove_'+str(idx)].render()
+			</th>
+			<td>$d['id']</td>
+			<td>$d['sourcetype']</td>
+			<td>$d['solabel']</td>
+			<td>$d['silabel']</td>
+			<td>$d['operation']</td>
+			<td>$d['comparetype']</td>
+			<td>$d['comparevalue']</td>
+			<td>$d['colabel']</td>
+			<td>$d['cilabel']</td>
+			<td>$d['olabel']</td>
+			<td>$d['outcomevalue']</td>
+			<td>$d['priority']</td>
+		</tr>
+	
+	$if mode =='add':
+		$code:
+			idx += 1
+		<tr>
+			<th>
+				$:rulesform['rule_id_'+str(idx)].render()
+				$:rulesform['rule_save_'+str(idx)].render()
+				$:rulesform['rule_cancel_'+str(idx)].render()
+			</th>
+			<td>*</td>
+			<td>$:rulesform['rule_sourcetype_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_sourceoutputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_sourceinputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_operation_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_comparetype_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_comparevalue_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_compareoutputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_compareinputid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_outcomeid_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_outcomevalue_'+str(idx)].render()</td>
+			<td>$:rulesform['rule_priority_'+str(idx)].render()</td>
+		</tr>
+		
+	
+	</table>
+	$:rulesform['command'].render()
+	$:rulesform['rule_add'].render()
+	

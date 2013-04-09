@@ -1,0 +1,6 @@
+$def with (data)
+	<h3>$data['dtStart'].strftime("%m/%d/%Y %I:%M %p") to $data['dtEnd'].strftime("%m/%d/%Y %I:%M %p")</h3>
+	$for graph in data['graphs']:
+		$code:
+			src = "static/"+graph['label']+".png?"+data['now'].strftime('%s')
+		<img src="$src"/>

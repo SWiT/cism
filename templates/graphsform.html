@@ -1,0 +1,16 @@
+$def with (graphsform)
+	<form action="" method="post" class="nocss">
+		<div id="cal1Container" class="calContainer"></div>
+		<div id="cal2Container" class="calContainer"></div>
+		<div>
+			<span>$:graphsform['command'].render()</span>
+			<span>$:graphsform['startDateTime'].render()</span>
+			<span>$:graphsform['endDateTime'].render()</span>
+			<span>$:graphsform['btngetgraphs'].render()</span>
+		</div>
+		<div>
+			<span>Auto$:graphsform['graphsautoupdate'].render()</span>
+			<span>range$:graphsform['graphsrange'].render()hours</span>
+			<span>every$:graphsform['graphsgetinterval'].render()ms</span>
+		</div>
+	</form>

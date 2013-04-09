@@ -1,0 +1,22 @@
+$def with (data)
+<html>
+<head>
+	<title>Control Interface & Sensor Monitoring</title>
+	<link rel="stylesheet" type="text/css" href="static/default.css">
+</head>
+<body class="yui3-skin-sam">
+	<h1>CISM - Control Interface & Sensor Monitoring</h1>
+	
+	<div id="login" class="container">
+		<h2>Login</h2>
+		<div class="block">						
+			<div class="content">
+				$:data['content']['login']
+			</div>
+			<form action="?" method="post">
+				$:data['forms']['login']
+			</form>
+		</div>
+	</div>
+</body>
+</html>

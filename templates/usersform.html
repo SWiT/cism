@@ -1,0 +1,62 @@
+$def with (usersform, users, mode='view', itemid=None, message=None)
+	$if message!=None:
+		<div class="message">
+			<h3>$message
+			$if mode =='remove':
+				<div class="confirm">
+					$:usersform['user_confirm_action'].render()
+					$:usersform['user_confirm_itemid'].render()
+					$:usersform['user_confirm_yes'].render()
+					$:usersform['user_confirm_no'].render()
+				</div>
+			</h3>
+		</div>
+		
+	<table>
+	<tr>
+		<th></th>
+		<th>id</th>
+		<th>username</th>
+		<th>password</th>
+	</tr>
+	$for idx, d in enumerate(users):
+		<tr>
+		$if mode=='edit' and itemid==d['id']:
+			<th>
+				$:usersform['user_id_'+str(idx)].render()
+				$:usersform['user_save_'+str(idx)].render()
+				$:usersform['user_cancel_'+str(idx)].render()
+			</th>
+			<td>$:d['id']</td>
+			<td>$:usersform['user_username_'+str(idx)].render()</td>
+			<td>$:usersform['user_password_'+str(idx)].render()</td>
+		$else:
+			<th>
+				$:usersform['user_id_'+str(idx)].render()
+				$:usersform['user_edit_'+str(idx)].render()
+				$:usersform['user_remove_'+str(idx)].render()
+			</th>
+			<td>$d['id']</td>
+			<td>$d['username']</td>
+			<td>*****</td>
+		</tr>
+	
+	$if mode =='add':
+		$code:
+			idx += 1
+		<tr>
+			<th>
+				$:usersform['user_id_'+str(idx)].render()
+				$:usersform['user_save_'+str(idx)].render()
+				$:usersform['user_cancel_'+str(idx)].render()
+			</th>
+			<td>*</td>
+			<td>$:usersform['user_username_'+str(idx)].render()</td>
+			<td>$:usersform['user_password_'+str(idx)].render()</td>
+		</tr>
+		
+	
+	</table>
+	$:usersform['command'].render()
+	$:usersform['user_add'].render()
+	

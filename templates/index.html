@@ -1,0 +1,118 @@
+$def with (data)
+<html>
+<head>
+	<title>Control Interface & Sensor Monitoring</title>
+	<script src="http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"></script>
+	<script src="static/client.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/default.css">
+</head>
+<body class="yui3-skin-sam">
+	<div class="logout">
+		<a href="?logout=true">log out</a>
+	</div>
+	
+	<h1>CISM - Control Interface & Sensor Monitoring</h1>
+	
+	<div id="graphs" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Graphs</h2>
+		<div class="block">			
+			$:data['forms']['graphs']				
+			<div class="content">
+				$:data['content']['graphs']
+			</div>
+		</div>
+	</div>
+	
+	<div id="graphsettings" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Graph Settings</h2>
+		<div class="block">
+			<div class="content"></div>
+			<form action="" method="post">
+				$:data['forms']['graphsettings']
+			</form>
+		</div>
+	</div>
+	
+	<div id="statuses" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Statuses</h2>
+		<div class="block">
+			<div class="content">$:data['content']['statuses']</div>
+			<form action="" method="post" class="nocss">
+				$:data['forms']['statuses']
+			</form>
+		</div>	
+	</div>		
+		
+	<div id="iodevices" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>IO Devices</h2>
+		<div class="block">
+			<div class="content"></div>	
+			<form action="" method="post">
+				$:data['forms']['iodevice']
+			</form>
+		</div>
+	</div>
+	
+	<div id="inputs" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Inputs</h2>
+		<div class="block">
+			<div class="content"></div>
+			<form action="" method="post">
+				$:data['forms']['input']
+			</form>
+		</div>
+	</div>
+
+	<div id="outputs" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Outputs</h2>
+		<div class="block">
+			<div class="content">
+				<form action="" method="post">
+					$:data['forms']['output']	
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div id="inputtypes" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Input Types</h2>
+		<div class="block">
+			<div class="content"></div>	
+			<form action="" method="post">
+				$:data['forms']['inputtypes']
+			</form>
+		</div>
+	</div>
+	
+	<div id="outputtypes" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Output Types</h2>
+		<div class="block">
+			<div class="content"></div>	
+			<form action="" method="post">
+				$:data['forms']['outputtypes']
+			</form>
+		</div>
+	</div>
+	
+	<div id="rules" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Rules</h2>
+		<div class="block">
+			<div class="content"></div>	
+			<form action="" method="post">
+				$:data['forms']['rules']
+			</form>
+		</div>
+	</div>
+	
+	<div id="users" class="container">
+		<h2 class="blocktoggle"><div class="expand-collapse arrow-down"></div>Users</h2>
+		<div class="block">
+			<div class="content"></div>	
+			<form action="" method="post">
+				$:data['forms']['users']
+			</form>
+		</div>
+	</div>
+	
+</body>
+</html>
