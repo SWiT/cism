@@ -28,8 +28,7 @@ unsigned long timelastoutput[NUM_OUTPUTS] = {0};
 /*
  *  Rules
  */
-float maxTemp = 81;
-
+float maxTemp = 80;
 
 
 
@@ -86,10 +85,6 @@ void loop() {
       readSensors();
       outputJSON();
       
-    } else if(comString=="getdata") {
-      readSensors();
-      outputData();
-      
     } else if(comString.substring(0,9)=="setoutput") {
       comString = comString.substring(9);
       comString.trim();
@@ -115,14 +110,18 @@ void loop() {
   
   
   now = millis();
-  if((now - timelastSensor) > 5000){
-    readSensors();  
-  }
-  if((now - timelastPT) > 10000){
-    digitalWrite(output[0][1], output[0][3]);
-    timelastPT = now;
+  for(byte i=0; i<NUM_INPUTS; i++){
+    if((now - timelastinput[i]) > 5000){
+      readSensors();  
+    }
   }
   
+  for(byte i=0; i<NUM_OUTPUTS; i++){
+    if((now - timelastoutput[i]) > 10000){
+      digitalWrite(output[i][1], output[i][3]);
+      timelastoutput[i] = now;
+    }
+  }
 }
 
 void outputJSON() {
@@ -135,14 +134,14 @@ void outputJSON() {
     Serial.print("{\"id\":");
     Serial.print(i+1);
     Serial.print(",\"temperature\":");
-    if (isnan(t[i])){
+    if (isnan(t[i]) || isnan(h[i])){
       Serial.print("\"nan\"");
     }else{
       Serial.print(t[i]);
     }
     Serial.print(",");
     Serial.print("\"humidity\":"); 
-    if (isnan(h[i])){
+    if (isnan(t[i]) || isnan(h[i])){
       Serial.print("\"nan\"");
     }else{
       Serial.print(h[i]);
@@ -154,20 +153,6 @@ void outputJSON() {
   Serial.print(",\"data\":");
   Serial.print(output[0][3]);
   Serial.print("}]}");
-}
-
-void outputData(){
-  Serial.println("{\"data\":\"");
-  for(byte i=0; i<5; i++){
-    Serial.print(i);
-    Serial.print(": "); 
-    Serial.print(t[i]);
-    Serial.print(", ");
-    Serial.println(h[i]);
-  }
-  Serial.print("output[0]: ");
-  Serial.println((output[0][3])?"On":"Off");
-  Serial.println("\"}");
 }
 
 void readSensors() {
@@ -184,12 +169,15 @@ void readSensors() {
   h[4] = dht_s4.readHumidity();
   t[4] = dht_s4.readTemperature(true);
   
+  //Evaluate Rules
   output[0][3] = 1;
-  for(int i=0; i<5; i++){
+  for(byte i=0; i<NUM_INPUTS; i++){
     if(t[i] >= maxTemp){
       output[0][3] = 0;
     }
   }
   
-  timelastSensor = millis();
+  for(byte i=0; i<NUM_INPUTS; i++){
+    timelastinput[i] = millis();  
+  }
 }
