@@ -29,7 +29,7 @@ def process():
 	try:
 		serconn[0].write("getjson\n")
 		serialdata = serconn[0].readline()
-		print serialdata
+		print "/n_'"+serialdata+"'_"
 	except ValueError, SerialException:
 		printError("ERROR: getjson failed")
 		
@@ -37,6 +37,7 @@ def process():
 		data = json.loads(serialdata)
 		print data
 	except ValueError:
+		print "/n_'"+serialdata+"'_"
 		printError("ERROR: Decoding getjson JSON ")
 	
 	for input in data['input']:
