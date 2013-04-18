@@ -32,7 +32,12 @@ def process():
 		print "/n_'"+serialdata+"'_"
 	except ValueError, SerialException:
 		printError("ERROR: getjson failed")
-		
+	
+	if serialdata=='':
+		print "NO_DATA"
+		print "^---",now,"---"
+		return
+	
 	try:
 		data = json.loads(serialdata)
 		print data
