@@ -152,7 +152,7 @@ void outputJSON() {
   Serial.print(output[0][0]);
   Serial.print(",\"data\":");
   Serial.print(output[0][3]);
-  Serial.print("}]}");
+  Serial.println("}]}");
 }
 
 void readSensors() {
