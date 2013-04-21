@@ -34,6 +34,8 @@ input.color {width:65px;}
 input.text {width:110px;}
 input.number {width:50px;}
 
+div.colorsample {width:20px;float:right;margin:1px;}
+
 div.arrow-down {
     width: 0; 
     height: 0; 
