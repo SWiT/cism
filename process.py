@@ -53,17 +53,22 @@ def process():
 		return
 	
 	for input in data['input']:
-		sql = "SELECT IDT.id, IDT.label"
+		sql = "SELECT IDT.id, IDT.label, IDTO.dataoffset"
 		sql += " FROM input I"
 		sql += " JOIN input_data_type IDT"
 		sql += "   ON IDT.inputtypeid = I.inputtypeid"
+		sql += " JOIN input_data_type_offset IDTO"
+		sql += "   ON IDTO.inputid = I.id"
+		sql += "   AND IDTO.inputdatatypeid = IDT.id"
 		sql += " WHERE I.id=$id"
 		inputdatatyperesults = db.query(sql, vars={'id':input['id']})
 		for idt in inputdatatyperesults: 
 			if input[idt['label']]!="nan":
 				db.insert('input_data'
 					, inputid=input['id']
-					, data=input[idt['label']]
+					, data=(input[idt['label']] + idt['dataoffset'])
+					, dataraw=input[idt['label']]
+					, dataoffset=idt['dataoffset']
 					, datatypeid=idt['id']
 					, datetime=now)
 

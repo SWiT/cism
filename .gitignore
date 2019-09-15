@@ -1,5 +1,9 @@
 *.cfg
 *.pyc
+*.*~
 /nbproject/private/
 /nbproject/
 /sessions/
+/static/Heater & Fan.png
+/static/Humidity.png
+/static/Temperature.png

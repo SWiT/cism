@@ -107,7 +107,16 @@ void loop() {
       int arg1 = atoi(c);
       
       output[arg0][3] = arg1;
+      
+      //Serial.print("{\"output\":[{\"id\":");
+      //Serial.print(output[0][0]);
+      //Serial.print(",\"data\":");
+      //Serial.print(output[0][3]);
+      //Serial.println("}]}")
+      
+      
       Serial.print("{\"outputid\":");
+      Serial.print(output[arg0][0]);
       Serial.println("}");
       
     } else {
