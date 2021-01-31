@@ -1,6 +1,0 @@
-The following libraries for the Arduino are required if that sensor is used.
-
-DHT22 or DHT11
-https://github.com/adafruit/DHT-sensor-library
-
-
