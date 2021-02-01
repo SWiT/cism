@@ -1,0 +1,24 @@
+mqtt:
+    user: "USERNAME"
+    pass: "PASSWORD"
+    broker:
+        address: "IP_ADDRESS"
+        port: 1883
+
+logfile: "/home/pi/cism/log.csv"
+degree: "F"                         # F or C
+
+#DHT_SENSOR = Adafruit_DHT.DHT11
+#DHT_SENSOR = Adafruit_DHT.DHT22
+#DHT_SENSOR = Adafruit_DHT.AM2302
+sensors:
+  - name: "garden1/sensor1"
+    type: "AM2302"
+    gpiopin: 4
+    toffset: 0
+    hoffset: 0
+  - name: "garden1/sensor2"
+    type: "AM2302"
+    gpiopin: 17
+    toffset: 0
+    hoffset: 0
