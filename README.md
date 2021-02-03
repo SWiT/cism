@@ -1,5 +1,4 @@
 # CISM
-====
 Control Interface &amp; Sensor Monitoring
 
 Read temperature and humidity data from DHT22 (AM2302) sensors attached to Raspberry Pi Zeros.  
@@ -21,5 +20,7 @@ cd cism
 nano config.yaml
 ```
 
-Add `*/5 * * * * python3 /home/pi/cism/cism_cron.py` to cron
+Edit cron with
 `crontab -e`
+Add the following line to cron
+`* * * * * python3 /home/pi/cism/cism_cron.py`

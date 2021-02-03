@@ -42,19 +42,30 @@ mqttclient.connect(MQTT_BROKER, MQTT_PORT)              #establish connection
 f = open(LOGFILE, 'a+')
 if os.stat(LOGFILE).st_size == 0:
     f.write('DateTime,Name,Temperature(*'+DEGREE+'),Humidity(%)\r\n')
+
+print(time.strftime('%Y-%m-%d %H:%M:%S')+"\r\n")
     
 # Read each of the sensors data
 for sensor in SENSORS:
-    
+    print("Reading '" + sensor.name + "'.")
     humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, sensor.gpiopin)
     
     if DEGREE == "F":
         temperature = temperature * (9 / 5) + 32
 
+    # Add offsets
+    temperature += sensor.toffset
+    humidity    += sensor.hoffset
+
+    print("Temperature {0:0.1f}.".format(temperature))
+    print("Humidity {0:0.1f}.".format(humidity))
+
     if humidity is not None and temperature is not None:
         # Publish the data
         ret = mqttclient.publish(sensor.name+"/temperature","{0:0.1f}".format(temperature))
         ret = mqttclient.publish(sensor.name+"/humidity","{0:0.1f}".format(humidity))
+        
+        print("Logging to file.\r\n")
         f.write('{0},{1},{2:0.1f},{3:0.1f}\r\n'.format(time.strftime('%Y-%m-%d %H:%M:%S'), sensor.name, temperature, humidity))
     else:
         ret = mqttclient.publish(sensor.name,"FAILED")
