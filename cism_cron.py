@@ -5,7 +5,7 @@ import time
 import cism
 import yaml
 
-with open("config.yaml", 'r') as stream:
+with open("/home/pi/cism/config.yaml", 'r') as stream:
     try:
         cfg = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
